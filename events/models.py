@@ -14,4 +14,19 @@ class Event(models.Model):
     venue=models.CharField(max_length=200)
     date=models.DateField()
     time=models.TimeField()
-    created_at=models.DateTimeField(auto_created=True)
+    price=models.DecimalField(max_digits=8,decimal_places=2)
+    total_seats=models.IntegerField()
+    created_at=models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.title
+class TicketTier(models.Model):
+    event=models.ForeignKey(Event,on_delete=models.CASCADE,related_name="tiers")
+
+    name=models.CharField(max_length=50)
+
+    price=models.DecimalField(max_digits=8,decimal_places=2)
+
+    total_seats=models.IntegerField()
+
+    def __str__(self):
+        return f"{self.event.title}-{self.name}"
