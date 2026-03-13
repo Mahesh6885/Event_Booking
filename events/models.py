@@ -21,11 +21,8 @@ class Event(models.Model):
         return self.title
 class TicketTier(models.Model):
     event=models.ForeignKey(Event,on_delete=models.CASCADE,related_name="tiers")
-
     name=models.CharField(max_length=50)
-
     price=models.DecimalField(max_digits=8,decimal_places=2)
-
     total_seats=models.IntegerField()
 
     def __str__(self):
